@@ -2,6 +2,7 @@ use std::cmp::max;
 
 use borsh::{BorshDeserialize, BorshSerialize};
 use chrono::{DateTime, Utc};
+use deepsize::DeepSizeOf;
 use near_crypto::Signature;
 use num_rational::Rational;
 use primitive_types::U256;
@@ -23,7 +24,9 @@ use crate::utils::to_timestamp;
 use crate::validator_signer::{EmptyValidatorSigner, ValidatorSigner};
 use crate::version::ProtocolVersion;
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Clone, Debug, Eq, PartialEq, Default)]
+#[derive(
+    BorshSerialize, BorshDeserialize, Serialize, Clone, Debug, Eq, PartialEq, Default, DeepSizeOf,
+)]
 pub struct GenesisId {
     /// Chain Id
     pub chain_id: String,
@@ -31,7 +34,7 @@ pub struct GenesisId {
     pub hash: CryptoHash,
 }
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Clone, Debug, Eq, PartialEq)]
+#[derive(DeepSizeOf)]
 pub enum BlockValidityError {
     InvalidStateRoot,
     InvalidReceiptRoot,
@@ -41,7 +44,7 @@ pub enum BlockValidityError {
     InvalidChallengeRoot,
 }
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Debug, Clone, Eq, PartialEq)]
+#[derive(BorshSerialize, BorshDeserialize, Serialize, Debug, Clone, Eq, PartialEq, DeepSizeOf)]
 pub struct BlockV1 {
     pub header: BlockHeader,
     pub chunks: Vec<ShardChunkHeader>,
@@ -54,7 +57,7 @@ pub struct BlockV1 {
 
 /// Versioned Block data structure.
 /// For each next version, document what are the changes between versions.
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Debug, Clone, Eq, PartialEq)]
+#[derive(BorshSerialize, BorshDeserialize, Serialize, Debug, Clone, Eq, PartialEq, DeepSizeOf)]
 pub enum Block {
     BlockV1(Box<BlockV1>),
 }
@@ -433,7 +436,7 @@ impl Block {
 /// The tip of a fork. A handle to the fork ancestry from its leaf in the
 /// blockchain tree. References the max height and the latest and previous
 /// blocks for convenience
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Debug, Clone, PartialEq)]
+#[derive(BorshSerialize, BorshDeserialize, Serialize, Debug, Clone, PartialEq, DeepSizeOf)]
 pub struct Tip {
     /// Height of the tip (max height of the fork)
     pub height: BlockHeight,

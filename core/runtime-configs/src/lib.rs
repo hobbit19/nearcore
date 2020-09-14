@@ -1,4 +1,5 @@
 //! Settings of the parameters of the runtime.
+use deepsize::DeepSizeOf;
 use serde::{Deserialize, Serialize};
 
 use near_primitives::account::Account;
@@ -8,7 +9,7 @@ use near_runtime_fees::RuntimeFeesConfig;
 use near_vm_logic::VMConfig;
 
 /// The structure that holds the parameters of the runtime, mostly economics.
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq, DeepSizeOf)]
 #[serde(default)]
 pub struct RuntimeConfig {
     /// Amount of yN per byte required to have on the account.
@@ -48,7 +49,7 @@ impl RuntimeConfig {
 }
 
 /// The structure describes configuration for creation of new accounts.
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq, DeepSizeOf)]
 pub struct AccountCreationConfig {
     /// The minimum length of the top-level account ID that is allowed to be created by any account.
     pub min_allowed_top_level_account_length: u8,
