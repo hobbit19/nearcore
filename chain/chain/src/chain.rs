@@ -177,7 +177,6 @@ impl OrphanBlockPool {
 
 /// Facade to the blockchain block processing and storage.
 /// Provides current view on the state according to the chain state.
-/// #[
 #[derive(DeepSizeOf)]
 pub struct Chain {
     store: ChainStore,

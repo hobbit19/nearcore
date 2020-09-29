@@ -86,7 +86,7 @@ overflow-checks = true
 # jemallocator = { version = "0.3.0", features = ["unprefixed_malloc_on_supported_platforms", "profiling"] }
 
 [profile.bench]
-lto = false
+lto = true
 codegen-units = 1 # Use only 1 codegen-unit to enable full optimizations.
 overflow-checks = true
 
