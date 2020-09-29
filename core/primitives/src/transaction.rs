@@ -206,21 +206,41 @@ impl From<StakeAction> for Action {
     }
 }
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Deserialize, PartialEq, Eq, Clone, Debug, DeepSizeOf)]
+#[derive(
+    BorshSerialize,
+    BorshDeserialize,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Clone,
+    Debug,
+    DeepSizeOf,
+)]
 pub struct AddKeyAction {
     /// A public key which will be associated with an access_key
     pub public_key: PublicKey,
     /// An access key with the permission
     pub access_key: AccessKey,
 }
-\
+
 impl From<AddKeyAction> for Action {
     fn from(add_key_action: AddKeyAction) -> Self {
         Self::AddKey(add_key_action)
     }
 }
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Deserialize, PartialEq, Eq, Clone, Debug, DeepSizeOf)]
+#[derive(
+    BorshSerialize,
+    BorshDeserialize,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Clone,
+    Debug,
+    DeepSizeOf,
+)]
 pub struct DeleteKeyAction {
     /// A public key associated with the access_key to be deleted.
     pub public_key: PublicKey,
@@ -232,7 +252,17 @@ impl From<DeleteKeyAction> for Action {
     }
 }
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Deserialize, PartialEq, Eq, Clone, Debug, DeepSizeOf)]
+#[derive(
+    BorshSerialize,
+    BorshDeserialize,
+    Serialize,
+    Deserialize,
+    PartialEq,
+    Eq,
+    Clone,
+    Debug,
+    DeepSizeOf,
+)]
 pub struct DeleteAccountAction {
     pub beneficiary_id: AccountId,
 }
