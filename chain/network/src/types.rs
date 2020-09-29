@@ -153,7 +153,9 @@ pub struct PeerChainInfo {
 }
 
 /// Peer chain information.
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Clone, Debug, Eq, PartialEq, Default)]
+#[derive(
+    BorshSerialize, BorshDeserialize, Serialize, Clone, Debug, Eq, PartialEq, Default, DeepSizeOf,
+)]
 pub struct PeerChainInfoV2 {
     /// Chain Id and hash of genesis block.
     pub genesis_id: GenesisId,
@@ -532,7 +534,9 @@ pub enum PeerIdOrHash {
     Hash(CryptoHash),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, BorshSerialize, BorshDeserialize, Serialize, Hash)]
+#[derive(
+    Debug, Clone, PartialEq, Eq, BorshSerialize, BorshDeserialize, Serialize, Hash, DeepSizeOf,
+)]
 pub enum AccountIdOrPeerTrackingShard {
     AccountId(AccountId),
     // The request should be sent to any peer tracking shard.
