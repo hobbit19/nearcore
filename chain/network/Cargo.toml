@@ -5,6 +5,7 @@ authors = ["Near Inc <hello@nearprotocol.com>"]
 edition = "2018"
 
 [dependencies]
+memory-tracker = { path = "../../memory-tracker" }
 deepsize = { path = "../../deepsize" }
 bytes = "0.5"
 actix = "0.9"

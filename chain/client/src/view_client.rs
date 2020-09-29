@@ -141,6 +141,17 @@ impl ViewClientActor {
             return;
         }
         info!("PIOTR4 ViewClientActor: {}", self.deep_size_of());
+
+        info!("PIOTR6 crate::cache::get_cache_size(): {}", node_runtime::cache::get_cache_size());
+        info!(
+            "PIOTR7 near_vm_runner::cache::get_cache_size_cnt(): {}",
+            near_vm_runner::cache::get_cache_size_cnt()
+        );
+        /*info!(
+            "PIOTR6 crate::wasmer_runner::get_cache_size(): {}",
+            crate::wasmer_runner::get_cache_size()
+        );   */
+
         self.last_stats_time = now;
 
         memory_tracker::allocator::enable_tracking("ViewClient");

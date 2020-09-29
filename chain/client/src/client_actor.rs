@@ -188,6 +188,8 @@ impl Actor for ClientActor {
         self.log_summary(ctx);
 
         self.log_mem_usage(ctx);
+
+        memory_tracker::allocator::enable_tracking("ClientActor");
     }
 }
 

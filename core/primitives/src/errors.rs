@@ -88,7 +88,7 @@ impl From<ExternalError> for VMLogicError {
 }
 
 /// Internal
-#[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq, Eq)]
+#[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq, Eq, DeepSizeOf)]
 pub enum StorageError {
     /// Key-value db internal failure
     StorageInternalError,

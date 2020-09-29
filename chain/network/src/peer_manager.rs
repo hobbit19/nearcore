@@ -1138,6 +1138,7 @@ impl Actor for PeerManagerActor {
         self.ping_all_peers(ctx);
 
         self.log_mem_usage(ctx);
+        memory_tracker::allocator::enable_tracking("PeerManager");
     }
 
     /// Try to gracefully disconnect from active peers.

@@ -3,6 +3,7 @@ use cached::{cached_key, SizedCache};
 
 use crate::errors::IntoVMError;
 use crate::prepare;
+use cached::Cached;
 use near_vm_errors::VMError;
 use near_vm_logic::VMConfig;
 
@@ -34,4 +35,14 @@ pub(crate) fn compile_module(
 ) -> Result<wasmer_runtime::Module, VMError> {
     let prepared_code = prepare::prepare_contract(code, config)?;
     wasmer_runtime::compile(&prepared_code).map_err(|err| err.into_vm_error())
+}
+
+#[cfg(feature = "no_cache")]
+pub fn get_cache_size_cnt() -> usize {
+    0
+}
+
+#[cfg(not(feature = "no_cache"))]
+pub fn get_cache_size_cnt() -> usize {
+    MODULES.lock().unwrap().cache_size()
 }

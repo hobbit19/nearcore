@@ -196,6 +196,7 @@ impl Peer {
         network_metrics: NetworkMetrics,
         txns_since_last_block: Arc<AtomicUsize>,
     ) -> Self {
+        memory_tracker::allocator::enable_tracking("Peer");
         Peer {
             node_info,
             peer_addr,
@@ -609,6 +610,7 @@ impl Actor for Peer {
         }
 
         self.log_mem_usage(ctx);
+        memory_tracker::allocator::enable_tracking("Peer");
     }
 
     fn stopping(&mut self, _: &mut Self::Context) -> Running {

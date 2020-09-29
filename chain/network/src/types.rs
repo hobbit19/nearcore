@@ -232,7 +232,7 @@ pub struct Handshake {
 
 /// Struct describing the layout for Handshake.
 /// It is used to automatically derive BorshDeserialize.
-#[derive()]
+#[derive(BorshSerialize, BorshDeserialize, Serialize, PartialEq, Eq, Clone, Debug, DeepSizeOf)]
 pub struct HandshakeAutoDes {
     /// Protocol version.
     pub version: u32,
