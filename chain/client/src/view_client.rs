@@ -140,6 +140,7 @@ impl ViewClientActor {
         if diff < Duration::from_secs(10) {
             return;
         }
+        info!("PIOTR4 log_mem_usage");
         info!("PIOTR4 ViewClientActor: {}", self.deep_size_of());
 
         info!("PIOTR6 crate::cache::get_cache_size(): {}", node_runtime::cache::get_cache_size());
