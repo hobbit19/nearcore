@@ -18,7 +18,7 @@ use near_chain::types::AcceptedBlock;
 #[cfg(feature = "adversarial")]
 use near_chain::StoreValidator;
 use near_chain::{
-    byzantine_assert, Block, BlockHeader, ChainGenesis, ChainStore, ChainStoreAccess, Provenance,
+    byzantine_assert, Block, BlockHeader, ChainGenesis, ChainStoreAccess, Provenance,
     RuntimeAdapter,
 };
 use near_chain_configs::ClientConfig;

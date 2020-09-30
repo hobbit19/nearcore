@@ -6,7 +6,7 @@ use std::hash::Hash;
 use std::sync::{Arc, RwLock};
 use std::time::{Duration, Instant};
 
-use actix::{Actor, Addr, Context, Handler, SyncArbiter, SyncContext};
+use actix::{Actor, Addr, Handler, SyncArbiter, SyncContext};
 use cached::{Cached, SizedCache};
 use deepsize::DeepSizeOf;
 use log::{debug, error, info, trace, warn};

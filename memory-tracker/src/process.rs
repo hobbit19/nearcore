@@ -1,4 +1,4 @@
-use std::{sync, thread, time};
+use std::{thread, time};
 
 use crate::allocator;
 use futures::executor::block_on;
@@ -60,11 +60,6 @@ pub fn track_current_process(interval: u64) {
                     return;
                 }
                 if let Ok(memory) = block_on(process.memory()) {
-                    // Resident set size, amount of non-swapped physical memory.
-                    let rss = memory.rss().get::<byte>() as i64;
-                    // Virtual memory size, total amount of memory.
-                    let vms = memory.vms().get::<byte>() as i64;
-
                     info!(
                         "memory: {{ rss: {} vms: {} \
                                     allocated: {}, resident: {}, active: {}, \
@@ -74,7 +69,7 @@ pub fn track_current_process(interval: u64) {
                         // Resident set size, amount of non-swapped physical memory.
                         memory.rss().get::<byte>() as i64,
                         // Virtual memory size, total amount of memory.
-                        vms,
+                        memory.vms().get::<byte>() as i64,
                         mib_read!(allocated),
                         mib_read!(resident),
                         mib_read!(active),

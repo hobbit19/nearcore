@@ -22,7 +22,6 @@ macro_rules! rust2wasm {
         ()
     };
 }
-use wasmer_runtime::Ctx;
 
 macro_rules! wrapped_imports {
         ( $( $func:ident < [ $( $arg_name:ident : $arg_type:ident ),* ] -> [ $( $returns:ident ),* ] >, )* ) => {

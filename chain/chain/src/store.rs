@@ -7,7 +7,7 @@ use std::sync::Arc;
 use borsh::{BorshDeserialize, BorshSerialize};
 use cached::{Cached, SizedCache};
 use chrono::Utc;
-use deepsize::{Context, DeepSizeOf};
+use deepsize::DeepSizeOf;
 use tracing::debug;
 
 use near_primitives::block::{Approval, Tip};

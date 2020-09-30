@@ -41,8 +41,6 @@ use crate::metrics;
 use crate::sync::{BlockSync, HeaderSync, StateSync, StateSyncResult};
 use crate::types::{Error, ShardSyncDownload};
 use crate::SyncStatus;
-use actix::dev::{MessageResponse, ResponseChannel};
-use actix::{Actor, Message};
 
 const NUM_REBROADCAST_BLOCKS: usize = 30;
 

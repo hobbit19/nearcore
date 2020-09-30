@@ -2,7 +2,6 @@ use crate::{Context, DeepSizeOf};
 use actix::io::FramedWrite;
 use actix::Message;
 use chrono::{DateTime, Duration, Utc};
-use prometheus::Encoder;
 use std::net::IpAddr;
 use std::net::SocketAddr;
 use tokio;

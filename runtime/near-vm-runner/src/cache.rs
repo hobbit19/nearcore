@@ -3,7 +3,6 @@ use cached::{cached_key, SizedCache};
 
 use crate::errors::IntoVMError;
 use crate::prepare;
-use cached::Cached;
 use near_vm_errors::VMError;
 use near_vm_logic::VMConfig;
 

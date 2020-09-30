@@ -1,9 +1,9 @@
 #![feature(thread_id_value)]
 use std::convert::TryInto;
+use std::env;
 use std::fs;
 use std::io;
 use std::path::Path;
-use std::{env, thread};
 
 use actix::System;
 use clap::{crate_version, App, AppSettings, Arg, SubCommand};
@@ -19,8 +19,6 @@ use near_primitives::version::{Version, PROTOCOL_VERSION};
 use neard::config::init_testnet_configs;
 use neard::genesis_validate::validate_genesis;
 use neard::{get_default_home, get_store_path, init_configs, load_config, start_with_config};
-use std::alloc::{GlobalAlloc, Layout};
-use std::sync::atomic::{AtomicUsize, Ordering};
 
 #[global_allocator]
 static ALLOC: MyAllocator = MyAllocator;

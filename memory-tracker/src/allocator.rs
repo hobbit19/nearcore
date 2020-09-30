@@ -1,11 +1,8 @@
 use arr_macro::arr;
 use log::info;
 use std::alloc::{GlobalAlloc, Layout};
-use std::borrow::{Borrow, BorrowMut};
 use std::cell::RefCell;
-use std::convert::TryInto;
 use std::sync::atomic::{AtomicUsize, Ordering};
-use std::thread;
 
 const COUNTERS_SIZE: usize = 16384;
 static JEMALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
@@ -24,7 +21,7 @@ thread_local! {
 
 pub fn get_tid() -> usize {
     SANITY.fetch_add(1, Ordering::SeqCst);
-    let res = TID.with(|mut t| {
+    let res = TID.with(|t| {
         if *t.borrow() == usize::max_value() {
             *t.borrow_mut() = GTID.fetch_add(1, Ordering::SeqCst);
         }
@@ -68,7 +65,7 @@ unsafe impl GlobalAlloc for MyAllocator {
 pub fn enable_tracking(name: &str) {
     ENABLED.store(1, Ordering::SeqCst);
 
-    TID2.with(|mut t| {
+    TID2.with(|t| {
         if *t.borrow() == usize::max_value() {
             let tid = get_tid();
             info!("enabling tracking for {}: {}", name, tid);

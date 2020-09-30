@@ -7,7 +7,7 @@ use std::string::String;
 use std::sync::RwLock;
 
 use borsh::{BorshDeserialize, BorshSerialize};
-use deepsize::{known_deep_size, Context, DeepSizeOf};
+use deepsize::{Context, DeepSizeOf};
 #[cfg(feature = "single_thread_rocksdb")]
 use rocksdb::Env;
 use rocksdb::{
@@ -283,7 +283,6 @@ pub struct RocksDB {
 
 impl DeepSizeOf for RocksDB {
     fn deep_size_of_children(&self, _context: &mut Context) -> usize {
-        if let Ok(Some(x)) = self.db.property_int_value("XXX") {}
         0
     }
 }

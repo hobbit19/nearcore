@@ -3,11 +3,9 @@ use std::sync::Arc;
 #[cfg(not(feature = "no_cache"))]
 use cached::{cached_key, SizedCache};
 
-use deepsize::DeepSizeOf;
 use near_primitives::contract::ContractCode;
 use near_primitives::hash::CryptoHash;
 use near_store::StorageError;
-use std::borrow::Borrow;
 
 /// Cache size in number of cached modules to hold.
 #[cfg(not(feature = "no_cache"))]

@@ -148,8 +148,7 @@ use alloc::collections::BTreeSet as GenericSet;
 use log::info;
 #[cfg(feature = "std")]
 use std::collections::HashSet as GenericSet;
-use std::convert::TryInto;
-use std::ops::{Deref, DerefMut};
+use std::ops::Deref;
 use std::pin::Pin;
 use std::sync::{Arc, Mutex, RwLock};
 
@@ -435,7 +434,7 @@ impl<T> DeepSizeOf for RwLock<T>
 where
     T: DeepSizeOf,
 {
-    fn deep_size_of_children(&self, context: &mut Context) -> usize {
+    fn deep_size_of_children(&self, _context: &mut Context) -> usize {
         if let Ok(x) = self.write() {
             x.deep_size_of()
         } else {
