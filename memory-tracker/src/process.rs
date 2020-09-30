@@ -69,22 +69,12 @@ pub fn track_current_process(
                             // Virtual memory size, total amount of memory.
                             let vms = memory.vms().get::<byte>() as i64;
 
-                            //metrics!(gauge, "ckb-sys.mem.process", rss, "type" => "rss");
-                            //metrics!(gauge, "ckb-sys.mem.process", vms, "type" => "vms");
-
                             let allocated = mib_read!(allocated);
                             let resident = mib_read!(resident);
                             let active = mib_read!(active);
                             let mapped = mib_read!(mapped);
                             let retained = mib_read!(retained);
                             let metadata = mib_read!(metadata);
-
-                            //metrics!(gauge, "ckb-sys.mem.jemalloc", allocated, "type" => "allocated");
-                            //metrics!(gauge, "ckb-sys.mem.jemalloc", resident, "type" => "resident");
-                            //metrics!(gauge, "ckb-sys.mem.jemalloc", active, "type" => "active");
-                            //metrics!(gauge, "ckb-sys.mem.jemalloc", mapped, "type" => "mapped");
-                            //metrics!(gauge, "ckb-sys.mem.jemalloc", retained, "type" => "retained");
-                            //metrics!(gauge, "ckb-sys.mem.jemalloc", metadata, "type" => "metadata");
 
                             info!(
                                 "memory: {{ rss: {} vms: {} \
@@ -97,11 +87,6 @@ pub fn track_current_process(
                             allocator::print_counters_ary();
 
                             allocator::enable_tracking("memory_tracker");
-
-                        /*
-                        if let Some(tracker) = tracker_opt.clone() {
-                            let _ignored = tracker.gather_memory_stats();
-                        }  */
                         } else {
                             error!("failed to fetch the memory information about current process");
                         }

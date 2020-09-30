@@ -66,7 +66,7 @@ unsafe impl GlobalAlloc for MyAllocator {
 }
 
 pub fn enable_tracking(name: &str) {
-    ENABLED.store(1, Ordering::Relaxed);
+    ENABLED.store(1, Ordering::SeqCst);
 
     TID2.with(|mut t| {
         if *t.borrow() == usize::max_value() {
@@ -83,9 +83,9 @@ pub fn print_counters_ary() {
     let mut total_cnt: usize = 0;
     let mut total_size: usize = 0;
     for idx in 0..COUNTERS_SIZE {
-        let val: usize = MEM_SIZE.get(idx).unwrap().load(Ordering::Relaxed);
+        let val: usize = MEM_SIZE.get(idx).unwrap().load(Ordering::SeqCst);
         if val != 0 {
-            let cnt = MEM_CNT.get(idx).unwrap().load(Ordering::Relaxed);
+            let cnt = MEM_CNT.get(idx).unwrap().load(Ordering::SeqCst);
             total_cnt += cnt;
             info!("COUNTERS {}: {} {}", idx, cnt, val);
             total_size += val;
@@ -94,7 +94,6 @@ pub fn print_counters_ary() {
     info!("COUNTERS TOTAL {} {}", total_cnt, total_size);
 }
 
-
 pub fn get_sanity_val() -> usize {
-    SANITY.load(Ordering::Relaxed)
+    SANITY.load(Ordering::SeqCst)
 }
