@@ -3,6 +3,8 @@ use cached::{cached_key, SizedCache};
 
 use crate::errors::IntoVMError;
 use crate::prepare;
+#[cfg(not(feature = "no_cache"))]
+use cached::Cached;
 use near_vm_errors::VMError;
 use near_vm_logic::VMConfig;
 
