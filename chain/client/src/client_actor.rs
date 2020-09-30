@@ -1312,6 +1312,7 @@ impl ClientActor {
 
     fn log_mem_usage(&self, ctx: &mut Context<Self>) {
         ctx.run_later(Duration::from_secs(10), move |act, ctx| {
+            info!("PIOTR4 log_mem_usage");
             info!("PIOTR4 ClientActor: {}", act.deep_size_of());
             act.log_mem_usage(ctx);
 
