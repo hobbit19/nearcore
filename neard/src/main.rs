@@ -130,7 +130,6 @@ fn main() {
     info!("track_current_process pt1");
     memory_tracker::allocator::enable_tracking("main");
     memory_tracker::track_current_process(15);
-    memory_tracker::test();
     info!("track_current_process pt2");
 
     let home_dir = matches.value_of("home").map(|dir| Path::new(dir)).unwrap();
