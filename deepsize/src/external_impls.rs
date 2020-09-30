@@ -1,3 +1,7 @@
+use crate::{Context, DeepSizeOf};
+use actix::io::FramedWrite;
+use actix::Message;
+
 #[cfg(features = "slotmap")]
 mod slotmap_impl {
     use super::*;
@@ -15,5 +19,29 @@ mod slotmap_impl {
             }) + self.capacity() * size_of::<(u32, V)>
                 > ()
         }
+    }
+}
+
+impl<T: actix::Actor> DeepSizeOf for actix::Addr<T> {
+    fn deep_size_of_children(&self, _: &mut Context) -> usize {
+        0
+    }
+}
+
+impl<T: tokio::io::AsyncWrite + Unpin, U: tokio_util::codec::Encoder> DeepSizeOf
+    for FramedWrite<T, U>
+{
+    fn deep_size_of_children(&self, _: &mut Context) -> usize {
+        0
+    }
+}
+
+impl<M: Message> DeepSizeOf for actix::Recipient<M>
+where
+    M: Message + Send,
+    M::Result: Send,
+{
+    fn deep_size_of_children(&self, _: &mut Context) -> usize {
+        0
     }
 }

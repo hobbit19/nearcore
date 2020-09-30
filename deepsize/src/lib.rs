@@ -145,7 +145,6 @@ pub trait DeepSizeOf {
 
 #[cfg(not(feature = "std"))]
 use alloc::collections::BTreeSet as GenericSet;
-use log::info;
 #[cfg(feature = "std")]
 use std::collections::HashSet as GenericSet;
 use std::ops::Deref;
@@ -449,7 +448,6 @@ where
     T: DeepSizeOf,
 {
     fn deep_size_of_children(&self, _context: &mut Context) -> usize {
-        info!("MUTEX");
         if let Ok(x) = self.lock() {
             x.deep_size_of()
         } else {
@@ -464,9 +462,8 @@ where
     T: DeepSizeOf + ?Sized,
 {
     fn deep_size_of_children(&self, _context: &mut Context) -> usize {
-        info!("PIN");
-        let x: &T = self.deref();
-        x.deep_size_of()
+        let res: &T = self.deref();
+        res.deep_size_of()
     }
 }
 
@@ -475,17 +472,13 @@ where
     K: std::cmp::Eq + std::hash::Hash,
 {
     fn deep_size_of_children(&self, context: &mut Context) -> usize {
-        info!("XXX");
-        let res = self
-            .key_order()
+        self.key_order()
             .map(|child| size_of_val(&*child) + child.deep_size_of_children(context))
             .sum::<usize>()
             + self
                 .value_order()
                 .map(|child| size_of_val(&*child) + child.deep_size_of_children(context))
-                .sum::<usize>();
-        info!("XX {}", res);
-        res
+                .sum::<usize>()
     }
 }
 
