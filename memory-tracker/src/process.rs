@@ -61,7 +61,7 @@ pub fn track_current_process(interval: u64) {
                 }
                 if let Ok(memory) = block_on(process.memory()) {
                     info!(
-                        "memory: {{ rss: {} vms: {} \
+                        "memory: {{ rss: {} vms: {} }} jemalloc {{ \
                                     allocated: {}, resident: {}, active: {}, \
                                     mapped: {}, retained: {}, \
                                     metadata: {} \
