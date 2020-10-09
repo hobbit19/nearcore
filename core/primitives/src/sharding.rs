@@ -176,6 +176,15 @@ impl ShardChunkHeader {
         }
     }
 
+    pub fn inner_header_hash(&self) -> CryptoHash {
+        let inner = match self {
+            Self::V1(header) => &header.inner,
+            Self::V2(header) => &header.inner,
+        };
+        let inner_bytes = inner.try_to_vec().expect("Failed to serialize");
+        hash(&inner_bytes)
+    }
+
     pub fn height_created(&self) -> BlockHeight {
         match self {
             Self::V1(header) => header.inner.height_created,
